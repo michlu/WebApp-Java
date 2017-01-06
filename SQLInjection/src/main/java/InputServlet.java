@@ -2,6 +2,8 @@
  * @author Michlu
  * @sience 2017-01-06
  */
+import java.sql.PreparedStatement;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,7 +33,9 @@ public class InputServlet extends HttpServlet {
 
         Connection conn = null;
         ResultSet resultSet = null;
-        Statement statement = null;
+//        Statement statement = null;
+
+        PreparedStatement prepStmt = null;
 
         try {
             Context initialContext = new InitialContext();
@@ -40,9 +44,11 @@ public class InputServlet extends HttpServlet {
             DataSource ds = (DataSource) envContext.lookup("jdbc/users");
             conn = ds.getConnection();
 
-            statement = conn.createStatement();
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+
+            /*  NIE UZYWAC W TEJ WERSJI, POPRAWNA PONIZEJ
+            statement = conn.createStatement();
             // pass2" OR '1'='1'; --
             final String sqlQuery = "SELECT username, password FROM user WHERE "
                     +"username=" + "\"" + username + "\" "
@@ -50,6 +56,15 @@ public class InputServlet extends HttpServlet {
                     +"password=" + "\"" + password + "\";";
             System.out.println(sqlQuery);
             resultSet = statement.executeQuery(sqlQuery);
+            */
+
+            // POPRAWNIE uzywac PreparedStatment
+            prepStmt = conn.prepareStatement("SELECT username, password FROM user WHERE username=? AND password=?;");
+            prepStmt.setString(1, username);
+            prepStmt.setString(2, password);
+            System.out.println(prepStmt);
+            resultSet = prepStmt.executeQuery();
+
 
             if(resultSet.next()) {
                 String userFound = resultSet.getString("username");
@@ -69,7 +84,8 @@ public class InputServlet extends HttpServlet {
         } finally {
             try {
                 resultSet.close();
-                statement.close();
+                //statement.close();
+                prepStmt.close();
                 conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
