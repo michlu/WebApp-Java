@@ -1,6 +1,13 @@
 /**
  * @author Michlu
  * @sience 2017-01-06
+ *
+ * SQL injection – metoda ataku komputerowego wykorzystująca lukę w zabezpieczeniach aplikacji polegającą na
+ * nieodpowiednim filtrowaniu lub niedostatecznym typowaniu danych użytkownika, które to dane są później wykorzystywane
+ * przy wykonaniu zapytań (SQL) do bazy danych.
+ *
+ *  SPOSOB OCHRONY POPRZEZ - PreparedStatement
+ *
  */
 import java.sql.PreparedStatement;
 
@@ -39,8 +46,7 @@ public class InputServlet extends HttpServlet {
 
         try {
             Context initialContext = new InitialContext();
-            Context envContext = (Context) initialContext
-                    .lookup("java:comp/env");
+            Context envContext = (Context) initialContext.lookup("java:comp/env");
             DataSource ds = (DataSource) envContext.lookup("jdbc/users");
             conn = ds.getConnection();
 
