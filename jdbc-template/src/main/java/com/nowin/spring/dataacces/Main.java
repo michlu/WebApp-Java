@@ -1,12 +1,14 @@
 package com.nowin.spring.dataacces;
 
 
+import com.mysql.cj.api.x.Collection;
 import com.nowin.spring.dataacces.office.Office;
 import com.nowin.spring.dataacces.office.OfficesRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -56,5 +58,17 @@ public class Main {
             System.out.println("Lista obiektów: " + office1);
         }
 
+        // przyklad z parametrami "nazwanymi" i ich przekazywaniem
+        List<Map<String, Object>> productsWithPriceRage = productsRepository.getProductsWithPriceRage(50.0, 60.);
+        for (Map<String, Object> product1 : productsWithPriceRage) {
+            System.out.println(product1);
+        }
+
+        // podkladanie listy jako parametru
+        List<String> pro = Collections.singletonList("Motorcycles");
+        List<Map<String, Object>> productsWithProductLine = productsRepository.getProductsWithProductLine(pro);
+        for (Map<String, Object> product1 : productsWithProductLine) {
+            System.out.println(product1);
+        }
     }
 }
