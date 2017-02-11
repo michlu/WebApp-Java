@@ -48,7 +48,13 @@ public class Main {
         // Mapowanie do obiektu z zapytania
         OfficesRepository officesRepository = context.getBean("officesRepository", OfficesRepository.class);
         Office office = officesRepository.getofficeByOfficeCode("1");
-        System.out.println(office);
+        System.out.println("Zmapowany obiekt: " + office);
+
+        // mapowanie do listy obiektow
+        List<Office> allOffice = officesRepository.getAllOffice();
+        for (Office office1 : allOffice) {
+            System.out.println("Lista obiektów: " + office1);
+        }
 
     }
 }
