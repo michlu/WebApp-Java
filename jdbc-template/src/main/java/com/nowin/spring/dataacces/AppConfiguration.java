@@ -15,7 +15,7 @@ public class AppConfiguration {
     @Bean
     public DataSource dataSource(){
         MysqlDataSource dataSource  = new MysqlDataSource();
-        dataSource.setDatabaseName("classicmodels");
+        dataSource.setDatabaseName("classicmodels?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         dataSource.setServerName("localhost");
         dataSource.setPortNumber(3306);
         dataSource.setUser("root");

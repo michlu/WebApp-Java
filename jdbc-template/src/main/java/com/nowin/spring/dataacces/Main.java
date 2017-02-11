@@ -1,6 +1,8 @@
 package com.nowin.spring.dataacces;
 
 
+import com.nowin.spring.dataacces.office.Office;
+import com.nowin.spring.dataacces.office.OfficesRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -30,9 +32,23 @@ public class Main {
         Map<String, Object> product = productsRepository.getProductCode("S10_1678");
         System.out.println("Produkt code: " + product);
 
-        List<Map<String, Object>> productsWithPriceGreaterThan = productsRepository.getProductsWithPriceGreaterThan(70.0);
+        List<Map<String, Object>> productsWithPriceGreaterThan = productsRepository.getProductsWithPriceGreaterThan(80.0);
         for (Map<String, Object> productMap : productsWithPriceGreaterThan) {
             System.out.println(productMap);
         }
+
+        // tworze strumien z double/ zamieniam na double/ wyliczam srednia/ pobieram doubla
+        double average = productsRepository.getProductPrices().stream()
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .getAsDouble();
+        System.out.println(average);
+
+
+        // Mapowanie do obiektu z zapytania
+        OfficesRepository officesRepository = context.getBean("officesRepository", OfficesRepository.class);
+        Office office = officesRepository.getofficeByOfficeCode("1");
+        System.out.println(office);
+
     }
 }

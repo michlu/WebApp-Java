@@ -42,4 +42,9 @@ public class ProductsRepository {
         String sql = "SELECT * FROM products WHERE buyPrice > ?";
         return jdbcTemplate.queryForList(sql, priceLimit);
     }
+
+    public List<Double> getProductPrices() {
+        String sql = "SELECT buyPrice FROM products";
+        return jdbcTemplate.queryForList(sql, Double.class);
+    }
 }
