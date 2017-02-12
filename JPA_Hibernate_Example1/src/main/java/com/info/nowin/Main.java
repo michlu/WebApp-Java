@@ -1,5 +1,6 @@
 package com.info.nowin;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -50,21 +51,41 @@ public class Main {
 
         //4 paczka "findAndModify"
         // dodawanie danych, wyszukanie rekordu i zmiana danych
+        // nalezy skasowac <property name="hibernate.hbm2ddl.auto" value="create"/> z pliku xml
         com.info.nowin.findAndModify.Employee employee4 = new com.info.nowin.findAndModify.Employee();
         employee4.setFirsNtame("Romuald");
         employee4.setLastName("Kopernik");
         employee4.setSalary(1000.0);
 
+        //5 paczka "refreshingObject
+        // do DB dodajemy tiggera (automatyczny skrypt).. aby w programie Java bylo widac jego efekt trzeba odswiezyc klase poprzez manager encji
+        com.info.nowin.refreshingObject.Employee employee5 = new com.info.nowin.refreshingObject.Employee();
+        employee5.setFirsNtame("Antoni");
+        employee5.setLastName("Klepka");
+        employee5.setSalary(2000.0);
 
-        // nalezy skasowac <property name="hibernate.hbm2ddl.auto" value="create"/> z pliku xml
+
+        // TRANZAKCJA:
         entityManager.getTransaction().begin(); // zaczynamy tranzakcje
         entityManager.persist(employee1);   //1
         entityManager.persist(employee2);   //2
         entityManager.persist(employee3);   //3
         entityManager.persist(adress3);     //3
         entityManager.persist(employee4);    //4
+        entityManager.persist(employee5);    //5
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
+
+
+        //5 odswiezenie danych zmienonych w DB
+        entityManager.refresh(employee5);    //5
+
+
+        // KASOWANIE OBIEKTU:
+        entityManager.getTransaction().begin();
+        entityManager.remove(employee5);    //5
+        entityManager.getTransaction().commit();
+
 
         // zamkniecie managerow encji
         entityManager.close();

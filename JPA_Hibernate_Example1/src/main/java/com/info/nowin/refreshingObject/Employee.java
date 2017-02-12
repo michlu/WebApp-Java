@@ -3,7 +3,7 @@ package com.info.nowin.refreshingObject;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Pracownicy4")
+@Table(name = "Pracownicy5")
 public class Employee {
 
     @Id
@@ -15,6 +15,9 @@ public class Employee {
     private String lastName;
     @Column(name = "pensja")
     private double salary;
+
+    @Column(name = "podatek") // tylko geter
+    private double tax;
 
 
     public long getId() {
@@ -49,4 +52,7 @@ public class Employee {
         this.salary = salary;
     }
 
+    public double getTax() {
+        return tax;
+    }
 }
