@@ -18,7 +18,7 @@ public class JdbcMain {
         Class.forName(driver); // zaladowanie klasy Driver
 
         // polaczenie z baza danych pobierajac obiekt Connection z klasy DriverManager:
-        final String dbPath = "jdbc:mysql://localhost:3306/world";
+        final String dbPath = "jdbc:mysql://localhost:3306/world?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         Connection conn = DriverManager.getConnection(dbPath, "root", "admin");
 
         // Zapytania do bazy danych można wykonywać poprzez obiekt klasy Statement, który pobierzemy z obiektu Connection:
