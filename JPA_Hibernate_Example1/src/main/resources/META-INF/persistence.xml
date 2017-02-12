@@ -12,7 +12,7 @@
             <property name="javax.persistence.jdbc.password" value="admin"/>           <!-- konfiguracja hasla -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mojaBaza"/>  <!-- adres url do bazy danych -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>   <!-- wybor dialektu do komunikacji z SQL -->
-            <!--<property name="hibernate.hbm2ddl.auto" value="update"/>           &lt;!&ndash; ustawia wszystko / na produkcji ustawia sie inne wartosci &ndash;&gt;-->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>           <!-- ustawia wszystko / na produkcji ustawia sie inne wartosci -->
         </properties>
     </persistence-unit>
 </persistence>

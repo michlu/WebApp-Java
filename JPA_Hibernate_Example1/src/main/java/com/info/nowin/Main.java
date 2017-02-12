@@ -1,6 +1,9 @@
 package com.info.nowin;
 
 
+import com.info.nowin.oneToOneBidirectional.Cat;
+import com.info.nowin.oneToOneBidirectional.Owner;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -65,6 +68,16 @@ public class Main {
         employee5.setSalary(2000.0);
 
 
+        //6 paczka "oneToOneBidirectional
+        // dwie tabele powiazane ze soba one to one / dwukierunkowa (map
+        Owner owner1 = new Owner();
+        Cat cat1 = new Cat();
+        owner1.setFirstName("Jan");
+        owner1.setLastName("Nowak");
+        cat1.setName("Roman");
+        owner1.setCat(cat1);
+
+
         // TRANZAKCJA:
         entityManager.getTransaction().begin(); // zaczynamy tranzakcje
         entityManager.persist(employee1);   //1
@@ -73,6 +86,8 @@ public class Main {
         entityManager.persist(adress3);     //3
         entityManager.persist(employee4);    //4
         entityManager.persist(employee5);    //5
+        entityManager.persist(owner1);      //6
+        entityManager.persist(cat1);        //6
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
 
@@ -85,6 +100,9 @@ public class Main {
         entityManager.getTransaction().begin();
         entityManager.remove(employee5);    //5
         entityManager.getTransaction().commit();
+
+
+        entityManager.refresh(cat1);
 
 
         // zamkniecie managerow encji
