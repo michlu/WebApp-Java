@@ -11,6 +11,7 @@ import java.util.Collection;
  */
 @Entity
 public class Phone {
+    
     @Id
     @GeneratedValue
     private long id;
