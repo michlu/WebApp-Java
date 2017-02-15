@@ -1,12 +1,16 @@
 package com.info.nowin;
 
 
+import com.info.nowin.oneToManyUnidirectional.Employee;
+import com.info.nowin.oneToManyUnidirectional.Phone;
 import com.info.nowin.oneToOneBidirectional.Cat;
 import com.info.nowin.oneToOneBidirectional.Owner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -77,6 +81,23 @@ public class Main {
         cat1.setName("Roman");
         owner1.setCat(cat1);
 
+        //7 paczka "oneToManyUnidirectional
+        // dwie tabele powiazane jeden do wielu / jednokierunkowy
+        com.info.nowin.oneToManyUnidirectional.Employee employee6 = new com.info.nowin.oneToManyUnidirectional.Employee();
+        Phone phone1 = new Phone();
+        Phone phone2 = new Phone();
+        employee6.setFirsNtame("Zbigniew");
+        employee6.setLastName("Maj");
+        employee6.setSalary(700.0);
+        phone1.setType("mobile");
+        phone2.setType("home");
+        phone1.setNumber("666 666 666");
+        phone2.setNumber("299 99 99");
+        List<Phone> phones = new ArrayList<>();
+        phones.add(phone1);
+        phones.add(phone2);
+        employee6.setPhones(phones); // przekazanie listy telefonow
+
 
         // TRANZAKCJA:
         entityManager.getTransaction().begin(); // zaczynamy tranzakcje
@@ -88,6 +109,9 @@ public class Main {
         entityManager.persist(employee5);    //5
         entityManager.persist(owner1);      //6
         entityManager.persist(cat1);        //6
+        entityManager.persist(employee6);   //7
+        entityManager.persist(phone1);      //7
+        entityManager.persist(phone2);      //7
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
 
