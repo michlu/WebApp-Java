@@ -1,6 +1,7 @@
 package com.info.nowin;
 
 
+import com.info.nowin.manyToMany.Project;
 import com.info.nowin.oneToManyUnidirectional.Employee;
 import com.info.nowin.oneToManyUnidirectional.Phone;
 import com.info.nowin.oneToOneBidirectional.Cat;
@@ -98,6 +99,46 @@ public class Main {
         phones.add(phone2);
         employee6.setPhones(phones); // przekazanie listy telefonow
 
+        //8 paczka "oneToManyBidirectional"
+        // relacja jeden do wielu, z powiazaniem wielu do konkretnej tabeli ownera
+        // do employee nie przekazujemy listy, jednak powiazania sie tworza
+        com.info.nowin.oneToManyBidirectional.Employee employee7 = new com.info.nowin.oneToManyBidirectional.Employee();
+        employee7.setFirsNtame("Zbyszek");
+        employee7.setLastName("Kieliszek");
+        employee7.setSalary(200.0);
+        com.info.nowin.oneToManyBidirectional.Phone phoneB1 = new com.info.nowin.oneToManyBidirectional.Phone();
+        com.info.nowin.oneToManyBidirectional.Phone phoneB2 = new com.info.nowin.oneToManyBidirectional.Phone();
+        phoneB1.setType("mobile");
+        phoneB1.setNumber("123345456");
+        phoneB1.setEmployee(employee7);
+        phoneB2.setType("home");
+        phoneB2.setNumber("123566433");
+        phoneB2.setEmployee(employee7);
+
+        //9 paczka "manyToMany"
+        // relacja wielu do wielu
+        // generator identyfikatorow GenerationType.TABLE
+        Project project1 = new Project();
+        Project project2 = new Project();
+        project1.setName("Projekt 1");
+        project2.setName("Projekt 2");
+        com.info.nowin.manyToMany.Employee employee8 = new com.info.nowin.manyToMany.Employee("Angelika", "Ubysz", 150.0);
+        com.info.nowin.manyToMany.Employee employee9 = new com.info.nowin.manyToMany.Employee("Mariola", "Kowalska", 350.0);
+        com.info.nowin.manyToMany.Employee employee10 = new com.info.nowin.manyToMany.Employee("Emilia", "Umańska", 450.0);
+        com.info.nowin.manyToMany.Employee employee11 = new com.info.nowin.manyToMany.Employee("Krystian", "Bednarek", 190.0);
+        com.info.nowin.manyToMany.Employee employee12 = new com.info.nowin.manyToMany.Employee("Mateusz", "Szczesniak", 450.0);
+
+        List<com.info.nowin.manyToMany.Employee> employees1 = new ArrayList<>();
+        employees1.add(employee8);
+        employees1.add(employee9);
+        employees1.add(employee10);
+        List<com.info.nowin.manyToMany.Employee> employees2 = new ArrayList<>();
+        employees2.add(employee8); // wykorzystany do dwoch projektow
+        employees2.add(employee11);
+        employees2.add(employee12);
+
+        project1.setEmployees(employees1); // dodanie pracownikow do projektow
+        project2.setEmployees(employees2);
 
         // TRANZAKCJA:
         entityManager.getTransaction().begin(); // zaczynamy tranzakcje
@@ -112,6 +153,17 @@ public class Main {
         entityManager.persist(employee6);   //7
         entityManager.persist(phone1);      //7
         entityManager.persist(phone2);      //7
+        entityManager.persist(employee7);      //8
+        entityManager.persist(phoneB1);      //8
+        entityManager.persist(phoneB2);      //8
+
+        entityManager.persist(project1);
+        entityManager.persist(project2);
+        entityManager.persist(employee8);
+        entityManager.persist(employee9);
+        entityManager.persist(employee10);
+        entityManager.persist(employee11);
+        entityManager.persist(employee12);
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
 
