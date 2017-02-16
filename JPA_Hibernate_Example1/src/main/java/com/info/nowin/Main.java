@@ -2,10 +2,11 @@ package com.info.nowin;
 
 
 import com.info.nowin.manyToMany.Project;
-import com.info.nowin.oneToManyUnidirectional.Employee;
 import com.info.nowin.oneToManyUnidirectional.Phone;
 import com.info.nowin.oneToOneBidirectional.Cat;
 import com.info.nowin.oneToOneBidirectional.Owner;
+import com.info.nowin.singleTableInheritance.Profesor;
+import com.info.nowin.singleTableInheritance.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -140,6 +141,21 @@ public class Main {
         project1.setEmployees(employees1); // dodanie pracownikow do projektow
         project2.setEmployees(employees2);
 
+
+        //10 paczka singleTableInheritance
+        // sposob dziedziczenia, tworzenie jednej tabeli
+        Profesor profesor1 = new Profesor();
+        profesor1.setFirstName("Paweł");
+        profesor1.setLastName("Nowak");
+        profesor1.setSalary(9000.0);
+
+        Student student1 = new Student();
+        student1.setFirstName("Krzysztof");
+        student1.setLastName("Kononowicz");
+        student1.setAvarageGrade(4.75);
+
+
+
         // TRANZAKCJA:
         entityManager.getTransaction().begin(); // zaczynamy tranzakcje
         entityManager.persist(employee1);   //1
@@ -157,13 +173,16 @@ public class Main {
         entityManager.persist(phoneB1);      //8
         entityManager.persist(phoneB2);      //8
 
-        entityManager.persist(project1);
-        entityManager.persist(project2);
-        entityManager.persist(employee8);
-        entityManager.persist(employee9);
-        entityManager.persist(employee10);
-        entityManager.persist(employee11);
-        entityManager.persist(employee12);
+        entityManager.persist(project1);       //9
+        entityManager.persist(project2);    //9
+        entityManager.persist(employee8);   //9
+        entityManager.persist(employee9);   //9
+        entityManager.persist(employee10);  //9
+        entityManager.persist(employee11);  //9
+        entityManager.persist(employee12);  //9
+
+        entityManager.persist(profesor1); //10
+        entityManager.persist(student1); //10
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
 
