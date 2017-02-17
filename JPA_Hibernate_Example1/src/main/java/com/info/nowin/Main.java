@@ -1,6 +1,7 @@
 package com.info.nowin;
 
 
+import com.info.nowin.cascade.Employee;
 import com.info.nowin.manyToMany.Project;
 import com.info.nowin.oneToManyUnidirectional.Phone;
 import com.info.nowin.oneToOneBidirectional.Cat;
@@ -178,6 +179,24 @@ public class Main {
         student3.setLastName("Jaszewski");
         student3.setAvarageGrade(3.75);
 
+        //13 cascade
+        // kaskadowe dodawanie
+        com.info.nowin.cascade.Employee employee13 = new com.info.nowin.cascade.Employee();
+        employee13.setFirsNtame("Maciej");
+        employee13.setLastName("Ryzy");
+        employee13.setSalary(999.0);
+        List<com.info.nowin.cascade.Phone> phones2 = new ArrayList<>();
+        com.info.nowin.cascade.Phone phone3 = new com.info.nowin.cascade.Phone();
+        phone3.setNumber("12345678");
+        phone3.setType("work");
+        com.info.nowin.cascade.Phone phone4 = new com.info.nowin.cascade.Phone();
+        phone4.setNumber("98765431");
+        phone4.setType("home");
+        phones2.add(phone3);
+        phones2.add(phone4);
+        employee13.setPhones(phones2); // przekazanie listy telefonow
+
+
 
         // TRANZAKCJA:
         entityManager.getTransaction().begin(); // zaczynamy tranzakcje
@@ -212,6 +231,11 @@ public class Main {
 
         entityManager.persist(student3); //12
         entityManager.persist(profesor3); //12
+
+        entityManager.persist(employee13); //13
+        // zastepujemy dodawanie telefonow adnotacja "cascade" - powiaze je atuomatycznie do "employee
+//        entityManager.persist(phone3); //13
+//        entityManager.persist(phone4); //13
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
 
