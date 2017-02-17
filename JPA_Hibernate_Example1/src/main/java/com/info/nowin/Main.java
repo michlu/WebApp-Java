@@ -143,7 +143,7 @@ public class Main {
 
 
         //10 paczka singleTableInheritance
-        // sposob dziedziczenia, tworzenie jednej tabeli
+        // sposob dziedziczenia, tworzenie jednej tabeli (person)
         Profesor profesor1 = new Profesor();
         profesor1.setFirstName("Paweł");
         profesor1.setLastName("Nowak");
@@ -154,6 +154,29 @@ public class Main {
         student1.setLastName("Kononowicz");
         student1.setAvarageGrade(4.75);
 
+        //11 paczka joinedInheritance
+        // dziedziczenie - kazda klasa ma osobne tabele (3 tabele person, student, profesor)
+
+        com.info.nowin.joinedInheritance.Profesor profesor2 = new com.info.nowin.joinedInheritance.Profesor();
+        profesor2.setFirstName("Marian");
+        profesor2.setLastName("Ksiazek");
+        profesor2.setSalary(5000.0);
+        com.info.nowin.joinedInheritance.Student student2 = new com.info.nowin.joinedInheritance.Student();
+        student2.setFirstName("Dawid");
+        student2.setLastName("Gaugan");
+        student2.setAvarageGrade(2.75);
+
+        //12 paczka tablePerClassInheritance
+        // dziedziczenie - z trzech klas tworze dwie klasy konkretne (2 tabele student i profesor obydwie klasy dziedzicza po klasie person)
+
+        com.info.nowin.tablePerClassInheritance.Profesor profesor3 = new com.info.nowin.tablePerClassInheritance.Profesor();
+        profesor3.setFirstName("Donald");
+        profesor3.setLastName("Misiewicz");
+        profesor3.setSalary(6000.0);
+        com.info.nowin.tablePerClassInheritance.Student student3 = new com.info.nowin.tablePerClassInheritance.Student();
+        student3.setFirstName("Hieronim");
+        student3.setLastName("Jaszewski");
+        student3.setAvarageGrade(3.75);
 
 
         // TRANZAKCJA:
@@ -183,6 +206,12 @@ public class Main {
 
         entityManager.persist(profesor1); //10
         entityManager.persist(student1); //10
+
+        entityManager.persist(profesor2); //11
+        entityManager.persist(student2); //11
+
+        entityManager.persist(student3); //12
+        entityManager.persist(profesor3); //12
 
         entityManager.getTransaction().commit(); // komitujemy tranzakcje
 
