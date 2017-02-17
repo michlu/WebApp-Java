@@ -13,6 +13,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mojaBaza"/>  <!-- adres url do bazy danych -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>   <!-- wybor dialektu do komunikacji z SQL -->
             <property name="hibernate.hbm2ddl.auto" value="create"/>           <!-- ustawia wszystko / na produkcji ustawia sie inne wartosci -->
+            <property name="hibernate.show_sql" value="false"/>     <!-- pokazuj wykonane komendy hibernate na sql  -->
         </properties>
     </persistence-unit>
 </persistence>

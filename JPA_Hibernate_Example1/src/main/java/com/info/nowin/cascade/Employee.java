@@ -22,7 +22,7 @@ public class Employee {
     private double salary;
 
     @OneToMany(cascade = CascadeType.ALL) // polacznie kaskadowe
-    @JoinColumn(name = "owner_id2")
+    @JoinColumn(name = "owner_id3")
     private List<Phone> phones;
 
     public long getId() {
