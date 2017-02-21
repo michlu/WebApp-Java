@@ -30,3 +30,7 @@ JavaEE  examples
 <b>Spring JDBC-Template</b> <i>[jdbc-template]</i>
 - łaczenie z baza danych przy użyciu jdbc-template Springa
 - przykładowa baza danych: http://www.mysqltutorial.org/download/2 (classicmodels)
+
+<b>Spring DATA</b> <i>[pure-spring-data-app]</i>
+- łaczenie z baza danych przy użyciu Spring DATA (projekt bez spring boot'a)
+- konfiguracja przy użyciu Gradle (Hibernate, MySQL, spring-context, spring-data-jpa) 
