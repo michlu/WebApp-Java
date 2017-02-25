@@ -31,6 +31,16 @@ JavaEE  examples
 - łaczenie z baza danych przy użyciu jdbc-template Springa
 - przykładowa baza danych: http://www.mysqltutorial.org/download/2 (classicmodels)
 
-<b>Spring DATA</b> <i>[pure-spring-data-app]</i>
+<b>Spring DATA</b> 
+<br><i>[pure-spring-data-app]</i>
 - łaczenie z baza danych przy użyciu Spring DATA (projekt bez spring boot'a)
 - konfiguracja przy użyciu Gradle (Hibernate, MySQL, spring-context, spring-data-jpa) 
+
+<br><i>[paging-and-sorting]</i>
+- spring boot
+- standardowe metody repozytorium (findAll, Sort)
+- własne metody repozytorium
+- JpaRepository, @RepositoryDefinition, @NoRepositoryBean
+
+<br><i>[named-queries]</i>
+- tworzenie metod w repozytoriach za pomocą @Query i JPQL
